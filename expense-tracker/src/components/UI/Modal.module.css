@@ -1,0 +1,80 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    /* Overrule framer motion inline style for centering if needed, but best handled by motion logic. Actually motion handles translate. Let's rely on Fixed positioning centering trick or margin auto. */
+    /* Better centering approach with framer motion: */
+    margin: auto;
+
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 101;
+    overflow: hidden;
+    /* We need to set top/left to center it initially for the animation to work from */
+}
+
+/* Because Framer Motion handles transforms, centering via plain CSS with transforms conflicts. 
+   Strategy: Use flexbox on a wrapper or fixed inset with margin auto. 
+   Let's update Modal.jsx to use a wrapper for centering or change styles.
+   Actually, Overlay covering everything and Modal being centered flex item of it is easiest.
+*/
+
+/* Update: logic inside Modal.jsx structure to facilitate centering:
+   I will use a different CSS approach in this file relying on fixed positioning.
+*/
+.modal {
+    /* Centering logic handled by motion props x/y or top/left + translate. 
+       Let's use the standard "fixed inset 0 flex items-center justify-center" pattern in the Overlay? 
+       No, `overlay` is separate.
+       
+       Let's stick to: fixed, top 50, left 50, translate -50 -50.
+    */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Framer motion will overwrite transform, so we need to handle centering in motion variants or styled component. */
+    /* Wait, if framer motion animates 'y', it adds to the transform. mixing CSS transform and Framer transform is tricky. */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.closeBtn {
+    color: var(--text-secondary);
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s;
+}
+
+.closeBtn:hover {
+    background-color: #F3F4F6;
+    color: var(--text-main);
+}
+
+.content {
+    padding: 1.5rem;
+}
