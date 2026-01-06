@@ -36,6 +36,9 @@ export const AuthProvider = ({ children }) => {
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
+            options: {
+                emailRedirectTo: window.location.origin,
+            },
         });
         if (error) throw error;
         return data;
@@ -56,7 +59,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     const resetPassword = async (email) => {
-        const { error } = await supabase.auth.resetPasswordForEmail(email);
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin,
+        });
         if (error) throw error;
     };
 
