@@ -30,6 +30,7 @@ interface ScriptData {
 // Simple base64 click sound to avoid external assets
 const playHaptic = () => {
     try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const win = window as any
         const AudioContextClass = win.AudioContext || win.webkitAudioContext;
         if (!AudioContextClass) return;

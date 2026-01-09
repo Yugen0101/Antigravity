@@ -11,6 +11,7 @@ import { useState } from "react"
 // Simple click sound
 const playHaptic = () => {
     try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const AudioContextClass = (window as any).AudioContext || (window as any).webkitAudioContext;
         if (!AudioContextClass) return;
         const ctx = new AudioContextClass();
